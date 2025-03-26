@@ -1,30 +1,30 @@
 {
-    $schema: "https://docs.renovatebot.com/renovate-schema.json",
-    enabledManagers: [
-        "regex",
+    $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+    labels: [
+        'renovate',
     ],
-    "customManagers": [
+    dependencyDashboardLabels: [
+        'renovate',
+    ],
+    dependencyDashboard: true,
+    enabledManagers: [
+        'custom.regex',
+    ],
+    customManagers: [
         {
-            customType: "regex",
-            datasourceTemplate: "docker",
-            description: "Custom Manager for OCI images",
+            customType: 'regex',
+            datasourceTemplate: 'docker',
+            description: 'Custom Manager for OCI images',
             fileMatch: [
-                "build.gradle.kts"
+                'build.gradle.kts',
             ],
-            matchStringsStrategy: "combination",
+            matchStringsStrategy: 'combination',
             matchStrings: [
-                "runtime\\(\"(?:library[:/])?(?<packageName>.+):sha256!(?<currentDigest>[a-fA-F0-9]{64})\"\\)"
+                'runtime\\("(?:library[:/])?(?<packageName>.+):sha256!(?<currentDigest>[a-fA-F0-9]{64})"\\)',
             ],
             currentValueTemplate: "{{{replace ':' '!' currentDigest}}}",
-            versioningTemplate: "docker"
+            versioningTemplate: 'docker',
         },
     ],
     pinDigests: true,
-    labels: [
-        "renovate",
-    ],
-    dependencyDashboardLabels: [
-        "renovate",
-    ],
-    dependencyDashboard: true,
 }
