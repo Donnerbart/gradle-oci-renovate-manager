@@ -18,12 +18,11 @@
             fileMatch: [
                 'build.gradle.kts'
             ],
-            matchStringsStrategy: 'combination',
             matchStrings: [
-                'runtime\\("library:(?<packageName>.+):(?<currentDigest>.+)"\\)',
+                'runtime\\("(?:library[:/])?(?<packageName>.+):(?:sha256!)(?<currentDigest>.+)"\\)',
+                'runtime\\("(?:library[:/])?(?<packageName>.+):(?<currentValue>.+)"\\)'
             ],
-            currentValueTemplate: "{{{replace 'sha256!' '' currentDigest}}}",
-            autoReplaceStringTemplate: "runtime(library:{{{packageName}}}:sha256!{{{newValue}}})",
+            autoReplaceStringTemplate: 'runtime(library:{{{packageName}}}:{{{replace "sha256:" "sha256!" newDigest}}})',
             versioningTemplate: 'docker'
         },
     ],
