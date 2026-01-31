@@ -15,15 +15,15 @@
             customType: 'regex',
             datasourceTemplate: 'docker',
             description: 'Custom Manager for OCI images',
-            fileMatch: [
-                'build.gradle.kts'
+            managerFilePatterns: [
+                '/build.gradle.kts/',
             ],
             matchStrings: [
                 'runtime\\("(?:library[:/])?(?<packageName>.+):(?:sha256!)(?<currentDigest>.+)"\\)',
-                'runtime\\("(?:library[:/])?(?<packageName>.+):(?<currentValue>.+)"\\)'
+                'runtime\\("(?:library[:/])?(?<packageName>.+):(?<currentValue>.+)"\\)',
             ],
             autoReplaceStringTemplate: 'runtime(library:{{{packageName}}}:{{{replace "sha256:" "sha256!" newDigest}}})',
-            versioningTemplate: 'docker'
+            versioningTemplate: 'docker',
         },
     ],
     pinDigests: true,
